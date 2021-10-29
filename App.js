@@ -1,40 +1,74 @@
-import React from "react";
+import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import Weather from './components/Weather';
+import SearchBar from './components/SearchBar';
 
-//import * as firebase from 'firebase'
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+const API_KEY = "46a9246bebba16d42b36aac3fc3ba8af";
 
-import Landing from "./components/auth/Landing";
-import Register from "./components/auth/Register";
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-/*const firebaseConfig = {
-  apiKey: "AIzaSyApLDzwCkRr6wdj0rcsclAa_LjrvnQuEdM",
-  authDomain: "linkin-park-tribute-page.firebaseapp.com",
-  databaseURL: "https://linkin-park-tribute-page.firebaseio.com",
-  projectId: "linkin-park-tribute-page",
-  storageBucket: "linkin-park-tribute-page.appspot.com",
-  messagingSenderId: "609406729652",
-  appId: "1:609406729652:web:7e9693f9965fc384cfc6e1",
-  measurementId: "G-LWV64RGCFY"
-};
-
-if(firebase.apps.length === 0){
-  firebase.initializeApp(firebaseConfig)
-}
-*/
-const Stack = createStackNavigator();
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Landing">
-          <Stack.Screen
-            name="Landing"
-            component={Landing}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="Register" component={Register} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+
+    const [weatherData, setWeatherData] = useState(null);
+    const [loaded, setLoaded] = useState(true);
+
+    async function fetchWeatherData(cityName) {
+        setLoaded(false);
+        const API = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${API_KEY}`
+        try {
+            const response = await fetch(API);
+            if(response.status == 200) {
+                const data = await response.json();
+                setWeatherData(data);
+            } else {
+                setWeatherData(null);
+            }
+            setLoaded(true);
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchWeatherData('Mumbai');
+    }, [])
+    
+
+    if(!loaded) {
+        return (
+            <View style={styles.container}>
+                <ActivityIndicator color='gray'  size={36} />
+            </View>
+
+        )
+    }
+
+    else if(weatherData === null) {
+        return (
+            <View style={styles.container}>
+                <SearchBar fetchWeatherData={fetchWeatherData}/>
+                <Text style={styles.primaryText}>City Not Found! Try Different City</Text>
+            </View>
+        )
+    }
+
+    return (
+        <View style={styles.container}>
+            <Weather weatherData={weatherData} fetchWeatherData={fetchWeatherData}  />
+        </View>
+    );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  primaryText: {
+      margin: 20,
+      fontSize: 28
+  }
+});
