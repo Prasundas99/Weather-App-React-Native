@@ -1,10 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import Weather from './components/Weather';
 import SearchBar from './components/SearchBar';
 
-const API_KEY = "46a9246bebba16d42b36aac3fc3ba8af";
+
+const API_KEY = "98c74540796057cc93a4fa6105eb131a";
 
 
 export default function App() {
