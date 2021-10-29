@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import Weather from './components/Weather';
 import SearchBar from './components/SearchBar';
-
-
-const API_KEY = "98c74540796057cc93a4fa6105eb131a";
+import {API_KEY} from '@env'
 
 
 export default function App() {
@@ -31,7 +29,7 @@ export default function App() {
     }
 
     useEffect(() => {
-        fetchWeatherData('Mumbai');
+        fetchWeatherData('');
     }, [])
     
 
