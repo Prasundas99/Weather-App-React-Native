@@ -14,7 +14,7 @@ Issues and pull requests are always appreciated .
 #### Using React Native CLI :
 
 <ul>
-<li>Clone the respository using the following command <pre>git clone https://github.com/aryanshridhar/ReactNative-Weather-App.git</pre></li>
+<li>Clone the respository using the following command <pre>git clone https://github.com/Prasundas99/Weather-App-React-Native.git</pre></li>
 <li>Move into the directory using <pre>cd ReactNative-Weather-App/</pre></li>
 <li>Install all the dependencies listed in package.json file by running the following command in terminal : <pre>npm install</pre></li>
 <li>Follow the steps given in React native docs by clicking <a href = 'https://reactnative.dev/docs/running-on-device'>here</a></li>
@@ -25,7 +25,7 @@ Issues and pull requests are always appreciated .
 #### Using Expo CLI :
 
 <ul>
-<li>Clone the respository with the following command <pre>git clone https://github.com/aryanshridhar/ReactNative-Weather-App.git</pre></li>
+<li>Clone the respository with the following command <pre>git clone https://github.com/Prasundas99/Weather-App-React-Native.git</pre></li>
 <li>Move into the directory using <pre>cd ReactNative-Weather-App/</pre></li>
 <li>Move to the expo brach with : <pre>git checkout expo</pre></li>
 <li>Install all the dependencies listed in package.json file by running the following command in terminal : <pre>npm install</pre></li>
